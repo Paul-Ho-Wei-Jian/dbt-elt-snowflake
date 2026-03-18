@@ -45,7 +45,7 @@ dbt debug
 Notes:
 - The project currently runs with `dbt-core 1.9.1` and the Snowflake adapter installed in this environment.
 - There is no `packages.yml`, so `dbt deps` is not required.
-- Seed files are stored locally in [`/Users/howeijian/dbt_jaffle/jaffle_elt/seeds`](/Users/howeijian/dbt_jaffle/jaffle_elt/seeds) and loaded into Snowflake by dbt.
+- Seed files are stored locally in [`~/dbt_jaffle/jaffle_elt/seeds`](~/dbt_jaffle/jaffle_elt/seeds) and loaded into Snowflake by dbt.
 
 ## Usage
 
@@ -82,7 +82,7 @@ What gets built:
 - `intermediate` schema: reusable business logic views
 - `marts` schema: final fact, dimension, and reporting tables
 
-Schema behavior is controlled in [`/Users/howeijian/dbt_jaffle/jaffle_elt/dbt_project.yml`](/Users/howeijian/dbt_jaffle/jaffle_elt/dbt_project.yml), and schema naming is normalized by [`/Users/howeijian/dbt_jaffle/jaffle_elt/macros/generate_schema_name.sql`](/Users/howeijian/dbt_jaffle/jaffle_elt/macros/generate_schema_name.sql).
+Schema behavior is controlled in [`~/dbt_jaffle/jaffle_elt/dbt_project.yml`](~/dbt_jaffle/jaffle_elt/dbt_project.yml), and schema naming is normalized by [`~/dbt_jaffle/jaffle_elt/macros/generate_schema_name.sql`](~/dbt_jaffle/jaffle_elt/macros/generate_schema_name.sql).
 
 ## Examples
 
@@ -109,9 +109,9 @@ Example developer questions this project answers:
 - Which customers are new, repeat, high frequency, or high value in a given month?
 
 Helpful supporting docs:
-- [`/Users/howeijian/dbt_jaffle/jaffle_elt/analyses/marts_erd.md`](/Users/howeijian/dbt_jaffle/jaffle_elt/analyses/marts_erd.md)
-- [`/Users/howeijian/dbt_jaffle/jaffle_elt/analyses/marts_business_questions.md`](/Users/howeijian/dbt_jaffle/jaffle_elt/analyses/marts_business_questions.md)
-- [`/Users/howeijian/dbt_jaffle/jaffle_elt/analyses/custom_calculations.md`](/Users/howeijian/dbt_jaffle/jaffle_elt/analyses/custom_calculations.md)
+- [`~/dbt_jaffle/jaffle_elt/analyses/marts_erd.md`](~/dbt_jaffle/jaffle_elt/analyses/marts_erd.md)
+- [`~/dbt_jaffle/jaffle_elt/analyses/marts_business_questions.md`](~/dbt_jaffle/jaffle_elt/analyses/marts_business_questions.md)
+- [`~/dbt_jaffle/jaffle_elt/analyses/custom_calculations.md`](~/dbt_jaffle/jaffle_elt/analyses/custom_calculations.md)
 
 ## Repository Structure
 
@@ -133,11 +133,11 @@ jaffle_elt/
 
 Key folders:
 
-- [`/Users/howeijian/dbt_jaffle/jaffle_elt/models/staging`](/Users/howeijian/dbt_jaffle/jaffle_elt/models/staging): renames and recasts raw seeded data into stable source models.
-- [`/Users/howeijian/dbt_jaffle/jaffle_elt/models/intermediate`](/Users/howeijian/dbt_jaffle/jaffle_elt/models/intermediate): contains reusable business logic such as margin calculations, monthly customer spine generation, and customer metric aggregation.
-- [`/Users/howeijian/dbt_jaffle/jaffle_elt/models/marts`](/Users/howeijian/dbt_jaffle/jaffle_elt/models/marts): publishes final reporting tables.
-- [`/Users/howeijian/dbt_jaffle/jaffle_elt/seeds`](/Users/howeijian/dbt_jaffle/jaffle_elt/seeds): local CSV inputs loaded into Snowflake by `dbt seed`.
-- [`/Users/howeijian/dbt_jaffle/jaffle_elt/macros/surrogate_key.sql`](/Users/howeijian/dbt_jaffle/jaffle_elt/macros/surrogate_key.sql): helper macro for building deterministic row keys from multiple columns.
+- [`~/dbt_jaffle/jaffle_elt/models/staging`](~/dbt_jaffle/jaffle_elt/models/staging): renames and recasts raw seeded data into stable source models.
+- [`~/dbt_jaffle/jaffle_elt/models/intermediate`](~/dbt_jaffle/jaffle_elt/models/intermediate): contains reusable business logic such as margin calculations, monthly customer spine generation, and customer metric aggregation.
+- [`~/dbt_jaffle/jaffle_elt/models/marts`](~/dbt_jaffle/jaffle_elt/models/marts): publishes final reporting tables.
+- [`~/dbt_jaffle/jaffle_elt/seeds`](~/dbt_jaffle/jaffle_elt/seeds): local CSV inputs loaded into Snowflake by `dbt seed`.
+- [`~/dbt_jaffle/jaffle_elt/macros/surrogate_key.sql`](~/dbt_jaffle/jaffle_elt/macros/surrogate_key.sql): helper macro for building deterministic row keys from multiple columns.
 
 ## High-Level SQL Logic
 
