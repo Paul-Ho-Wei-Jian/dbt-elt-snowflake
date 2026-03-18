@@ -1,0 +1,45 @@
+version: 2
+
+seeds:
+  - name: raw_orders
+    description: "Seeded raw order headers from the provided CSV dataset."
+    columns:
+      - name: id
+        data_tests:
+          - not_null
+          - unique
+      - name: customer
+        data_tests:
+          - not_null
+
+  - name: raw_items
+    description: "Seeded raw order items from the provided CSV dataset."
+    columns:
+      - name: id
+        data_tests:
+          - not_null
+          - unique
+      - name: order_id
+        data_tests:
+          - not_null
+      - name: sku
+        data_tests:
+          - not_null
+
+  - name: raw_products
+    description: "Seeded raw product catalog from the provided CSV dataset."
+    columns:
+      - name: sku
+        data_tests:
+          - not_null
+          - unique
+
+  - name: raw_supplies
+    description: "Seeded raw supplies used to derive product cost."
+    columns:
+      - name: id
+        data_tests:
+          - not_null
+      - name: sku
+        data_tests:
+          - not_null

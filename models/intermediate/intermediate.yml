@@ -1,0 +1,42 @@
+version: 2
+
+models:
+  - name: int_valid_orders
+    description: "Canonical order set used as the core upstream order relation."
+    columns:
+      - name: order_id
+        description: "Valid order key."
+        data_tests:
+          - not_null
+          - unique
+
+  - name: int_order_margin
+    description: "Order line items enriched with product cost and margin calculations."
+    columns:
+      - name: order_item_id
+        description: "Order item key at line-item grain."
+        data_tests:
+          - not_null
+          - unique
+
+  - name: int_customer_month_spine
+    description: "One row per customer per snapshot month end from first order month onward."
+    columns:
+      - name: customer_id
+        description: "Customer key."
+        data_tests:
+          - not_null
+      - name: snapshot_month_end_date
+        description: "Month-end snapshot date."
+        data_tests:
+          - not_null
+      - name: snapshot_month_key
+        description: "Integer key for the snapshot month end date."
+        data_tests:
+          - not_null
+
+  - name: int_customer_metrics_monthly
+    description: "Monthly customer lifecycle and revenue metrics at customer and snapshot month grain."
+
+  - name: int_customer_segment_rules_monthly
+    description: "Monthly customer metrics enriched with percentile-based segment flags."

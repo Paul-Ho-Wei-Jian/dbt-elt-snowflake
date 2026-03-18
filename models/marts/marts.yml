@@ -1,0 +1,76 @@
+version: 2
+
+models:
+  - name: fct_orders
+    description: "Basic order fact table used to support customer reporting."
+    columns:
+      - name: order_id
+        description: "Primary key for each order."
+        data_tests:
+          - not_null
+          - unique
+      - name: customer_id
+        description: "Customer key."
+        data_tests:
+          - not_null
+      - name: order_date
+        description: "Date of the order."
+        data_tests:
+          - not_null
+
+  - name: dim_customer
+    description: "Basic customer dimension used to support customer reporting."
+    columns:
+      - name: customer_id
+        description: "Primary key for each customer."
+        data_tests:
+          - not_null
+          - unique
+
+  - name: dim_date
+    description: "Basic date dimension used to support customer reporting."
+    columns:
+      - name: date_day
+        description: "Primary calendar date."
+        data_tests:
+          - not_null
+          - unique
+      - name: date_key
+        description: "Integer date key in YYYYMMDD format."
+        data_tests:
+          - not_null
+          - unique
+
+  - name: mart_customer_metrics_monthly
+    description: "Monthly customer metric mart at one row per customer per snapshot month end."
+    columns:
+      - name: customer_id
+        description: "Customer key."
+        data_tests:
+          - not_null
+          - relationships:
+              to: ref('dim_customer')
+              field: customer_id
+      - name: snapshot_month_end_date
+        description: "Snapshot month end date."
+        data_tests:
+          - not_null
+      - name: snapshot_month_key
+        description: "Integer month-end key."
+        data_tests:
+          - not_null
+
+  - name: mart_customer_segments_monthly
+    description: "Monthly customer segmentation mart at one row per customer per snapshot month end."
+    columns:
+      - name: customer_id
+        description: "Customer key."
+        data_tests:
+          - not_null
+          - relationships:
+              to: ref('dim_customer')
+              field: customer_id
+      - name: snapshot_month_end_date
+        description: "Snapshot month end date."
+        data_tests:
+          - not_null

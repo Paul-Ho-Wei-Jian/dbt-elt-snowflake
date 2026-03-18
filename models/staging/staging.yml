@@ -1,0 +1,71 @@
+version: 2
+
+models:
+  - name: stg_orders
+    description: "Standardized order headers with renamed and recast fields."
+    columns:
+      - name: order_id
+        description: "Natural order key."
+        data_tests:
+          - not_null
+          - unique
+      - name: customer_id
+        description: "Customer key from the source system."
+        data_tests:
+          - not_null
+      - name: order_date
+        description: "Business order date."
+        data_tests:
+          - not_null
+
+  - name: stg_order_items
+    description: "Standardized order line items."
+    columns:
+      - name: order_item_id
+        description: "Natural order item key."
+        data_tests:
+          - not_null
+          - unique
+      - name: order_id
+        description: "Parent order key."
+        data_tests:
+          - not_null
+          - relationships:
+              to: ref('stg_orders')
+              field: order_id
+      - name: product_id
+        description: "Product key."
+        data_tests:
+          - not_null
+          - relationships:
+              to: ref('stg_products')
+              field: product_id
+
+  - name: stg_products
+    description: "Standardized product attributes."
+    columns:
+      - name: product_id
+        description: "Natural product key."
+        data_tests:
+          - not_null
+          - unique
+
+  - name: stg_supplies
+    description: "Standardized supply costs used to estimate product cost and margin."
+    columns:
+      - name: supply_row_key
+        description: "Unique row key for a supply record at supply, product, and name grain."
+        data_tests:
+          - not_null
+          - unique
+      - name: supply_id
+        description: "Reusable supply identifier from the source file."
+        data_tests:
+          - not_null
+      - name: product_id
+        description: "Product key for the supply row."
+        data_tests:
+          - not_null
+          - relationships:
+              to: ref('stg_products')
+              field: product_id
