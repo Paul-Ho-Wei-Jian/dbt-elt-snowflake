@@ -1,7 +1,7 @@
 # dbt-elt-snowflake
 
 ## Project Screenshot(s)
-![dbt_elt_dataModeling](dbt_elt_dataModeling)
+![dbt_elt_dataModeling](dbt_elt_dataModeling.png)
 
 ## Motivation
 
