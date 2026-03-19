@@ -1,5 +1,8 @@
 # dbt-elt-snowflake
 
+## Project Screenshot(s)
+![dbt_elt_dataModeling](dbt_elt_dataModeling)
+
 ## Motivation
 
 This project solves a common reporting problem: raw transactional tables are hard to use directly for monthly customer reporting. Analysts and downstream tools usually need:
