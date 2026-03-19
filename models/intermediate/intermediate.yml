@@ -19,7 +19,7 @@ models:
           - not_null
           - unique
 
-  - name: int_customer_month_spine
+  - name: int_customer_monthly_snapshot_spine
     description: "One row per customer per snapshot month end from first order month onward."
     columns:
       - name: customer_id

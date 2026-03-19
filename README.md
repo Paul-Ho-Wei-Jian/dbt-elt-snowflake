@@ -13,6 +13,18 @@ This project solves a common reporting problem: raw transactional tables are har
 
 The SQL in this repo keeps that logic explicit and layered so developers can trace each metric from source seed to final mart.
 
+## Business Logic And Value
+
+Business logic: deriving customer metrics over time
+
+- `int_order_margin` converts order items, product prices, and supply costs into margin-ready order detail, giving analysts a more realistic view of customer value than revenue alone.
+- `int_customer_metrics_monthly` rolls customer activity forward into monthly snapshot metrics, making it easy to track recency, order frequency, and revenue trends over time.
+- `int_customer_segment_rules_monthly` applies consistent rules on top of those metrics to classify customers into actionable segments such as new, repeat, high frequency, and high value.
+
+Final output: customer segmentation for decision-making
+
+This logic turns raw transactions into a decision-ready customer layer. Teams can use the final marts to identify who should be retained, reactivated, rewarded, or monitored, without having to rebuild the same metric definitions in every dashboard or analysis.
+
 ## Installation
 
 These steps assume you already have access to Snowflake and a working `~/.dbt/profiles.yml` entry named `jaffle_elt`.
@@ -148,7 +160,7 @@ At a high level, the codebase follows this flow:
 3. `int_order_margin` combines items, products, and supply costs to estimate item-level and order-level margin inputs.
 4. `fct_orders` joins canonical orders with aggregated margin.
 5. `dim_customer` and `dim_date` are derived from `fct_orders` to support reporting joins and filters.
-6. `int_customer_month_spine` creates one row per customer per month-end from the customer's first order month onward.
+6. `int_customer_monthly_snapshot_spine` creates one row per customer per month-end from the customer's first order month onward.
 7. `int_customer_metrics_monthly` joins the month spine to `fct_orders` and calculates lifetime and trailing-window metrics.
 8. `int_customer_segment_rules_monthly` adds percentile-based segmentation flags.
 9. `mart_customer_metrics_monthly` and `mart_customer_segments_monthly` publish the final reporting outputs.
