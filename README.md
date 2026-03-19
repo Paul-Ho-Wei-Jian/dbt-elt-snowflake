@@ -1,6 +1,6 @@
-# jaffle_elt
+# dbt-elt-snowflake
 
-`jaffle_elt` is a dbt project for Snowflake that turns seeded ecommerce source data into a small reporting layer focused on orders, customer history, and monthly customer segmentation.
+`bt-elt-snowflake` is a dbt project for Snowflake that turns seeded ecommerce source data into a small reporting layer focused on orders, customer history, and monthly customer segmentation.
 
 ## Motivation
 
@@ -25,39 +25,6 @@ Final output: customer segmentation for decision-making
 
 This logic turns raw transactions into a decision-ready customer layer. Teams can use the final marts to identify who should be retained, reactivated, rewarded, or monitored, without having to rebuild the same metric definitions in every dashboard or analysis.
 
-## Installation
-
-These steps assume you already have access to Snowflake and a working `~/.dbt/profiles.yml` entry named `jaffle_elt`.
-
-1. Clone the repository and move into the project folder.
-
-```bash
-cd ~/dbt_jaffle/jaffle_elt
-```
-
-2. Create and activate a virtual environment.
-
-```bash
-python3 -m venv .venv
-source .venv/bin/activate
-```
-
-3. Install dbt for Snowflake.
-
-```bash
-pip install dbt-core dbt-snowflake
-```
-
-4. Confirm dbt can read your profile and connect to Snowflake.
-
-```bash
-dbt debug
-```
-
-Notes:
-- The project currently runs with `dbt-core 1.9.1` and the Snowflake adapter installed in this environment.
-- There is no `packages.yml`, so `dbt deps` is not required.
-- Seed files are stored locally in [`~/dbt_jaffle/jaffle_elt/seeds`](~/dbt_jaffle/jaffle_elt/seeds) and loaded into Snowflake by dbt.
 
 ## Usage
 
@@ -120,11 +87,6 @@ Example developer questions this project answers:
 - What was a customer's lifetime value and recent activity at a given month-end?
 - Which customers are new, repeat, high frequency, or high value in a given month?
 
-Helpful supporting docs:
-- [`~/dbt_jaffle/jaffle_elt/analyses/marts_erd.md`](~/dbt_jaffle/jaffle_elt/analyses/marts_erd.md)
-- [`~/dbt_jaffle/jaffle_elt/analyses/marts_business_questions.md`](~/dbt_jaffle/jaffle_elt/analyses/marts_business_questions.md)
-- [`~/dbt_jaffle/jaffle_elt/analyses/custom_calculations.md`](~/dbt_jaffle/jaffle_elt/analyses/custom_calculations.md)
-
 ## Repository Structure
 
 ```text
@@ -148,7 +110,6 @@ Key folders:
 - [`~/dbt_jaffle/jaffle_elt/models/staging`](~/dbt_jaffle/jaffle_elt/models/staging): renames and recasts raw seeded data into stable source models.
 - [`~/dbt_jaffle/jaffle_elt/models/intermediate`](~/dbt_jaffle/jaffle_elt/models/intermediate): contains reusable business logic such as margin calculations, monthly customer spine generation, and customer metric aggregation.
 - [`~/dbt_jaffle/jaffle_elt/models/marts`](~/dbt_jaffle/jaffle_elt/models/marts): publishes final reporting tables.
-- [`~/dbt_jaffle/jaffle_elt/seeds`](~/dbt_jaffle/jaffle_elt/seeds): local CSV inputs loaded into Snowflake by `dbt seed`.
 - [`~/dbt_jaffle/jaffle_elt/macros/surrogate_key.sql`](~/dbt_jaffle/jaffle_elt/macros/surrogate_key.sql): helper macro for building deterministic row keys from multiple columns.
 
 ## High-Level SQL Logic
