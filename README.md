@@ -1,7 +1,5 @@
 # dbt-elt-snowflake
 
-`bt-elt-snowflake` is a dbt project for Snowflake that turns seeded ecommerce source data into a small reporting layer focused on orders, customer history, and monthly customer segmentation.
-
 ## Motivation
 
 This project solves a common reporting problem: raw transactional tables are hard to use directly for monthly customer reporting. Analysts and downstream tools usually need:
